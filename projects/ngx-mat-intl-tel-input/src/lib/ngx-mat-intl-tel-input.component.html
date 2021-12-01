@@ -14,7 +14,11 @@
       >+{{ selectedCountry.dialCode }}</span
     >
   </button>
-  <mat-menu #menu="matMenu">
+  <mat-menu
+    #menu="matMenu"
+    class="country-search-menu"
+    panelClass="country-search-menu"
+  >
     <input
       *ngIf="enableSearch"
       class="country-search"
@@ -23,6 +27,9 @@
       [placeholder]="searchPlaceholder"
       (click)="$event.stopPropagation()"
     />
+
+    <div class="country-list">
+
     <button
       type="button"
       mat-menu-item
@@ -40,9 +47,7 @@
     </button>
     <mat-divider *ngIf="preferredCountriesInDropDown?.length"></mat-divider>
     <ng-container *ngFor="let country of allCountries">
-      <button
-        type="button"
-        mat-menu-item
+      <div
         class="country-list-button"
         *ngIf="country | search: searchCriteria"
         (click)="onCountrySelect(country, focusable)"
@@ -53,8 +58,9 @@
         <div class="label-wrapper">
           {{ country.name }} +{{ country.dialCode }}
         </div>
-      </button>
+      </div>
     </ng-container>
+    </div>
   </mat-menu>
 
   <input
